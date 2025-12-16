@@ -20,6 +20,7 @@ export const Navigation: React.FC = () => {
     { name: t.nav.home, href: '#home' },
     { name: t.nav.about, href: '#about' },
     { name: t.nav.skills, href: '#skills' },
+    { name: t.nav.blog, href: '#blog' },
     { name: t.nav.cover_letter, href: '#cover-letter' },
     { name: t.nav.cv, href: '#cv' },
     { name: t.nav.contact, href: '#contact' },
@@ -58,8 +59,8 @@ export const Navigation: React.FC = () => {
         </a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <div className="flex gap-6">
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          <div className="flex gap-4 lg:gap-6">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 

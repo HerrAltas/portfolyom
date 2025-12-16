@@ -1,10 +1,25 @@
 export type Language = 'tr' | 'en' | 'de';
 export type Theme = 'light' | 'dark';
 
+export interface Message {
+  role: 'user' | 'model';
+  text: string;
+}
+
 export interface SkillData {
   subject: string;
   A: number; // Proficiency
   fullMark: number;
+}
+
+export interface BlogPost {
+    title: string;
+    excerpt: string;
+    date: string;
+    readTime: string;
+    category: string;
+    image: string;
+    link: string;
 }
 
 export interface Translations {
@@ -12,6 +27,7 @@ export interface Translations {
     home: string;
     about: string;
     skills: string;
+    blog: string;
     cover_letter: string;
     cv: string;
     contact: string;
@@ -30,6 +46,12 @@ export interface Translations {
     title: string;
     subtitle: string;
   };
+  blog: {
+    title: string;
+    subtitle: string;
+    read_more: string;
+    maintenance_message: string;
+  };
   cover_letter: {
     title: string;
     subtitle: string;
@@ -47,19 +69,14 @@ export interface Translations {
     message_placeholder: string;
     send: string;
   };
-  ai: {
-    chat_trigger: string;
-    placeholder: string;
-    disclaimer: string;
-    intro: string;
-  };
   seo: {
     title: string;
     description: string;
-  }
-}
-
-export interface Message {
-  role: 'user' | 'model';
-  text: string;
+  };
+  ai: {
+    chat_trigger: string;
+    intro: string;
+    placeholder: string;
+    disclaimer: string;
+  };
 }

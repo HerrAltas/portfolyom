@@ -1,4 +1,4 @@
-import type { SkillData, Translations, Language } from './types';
+import { SkillData, Translations, Language, BlogPost } from './types';
 
 export const TRANSLATIONS: Record<Language, Translations> = {
   en: {
@@ -6,6 +6,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       home: 'Home',
       about: 'About',
       skills: 'Skills',
+      blog: 'Writings',
       cover_letter: 'Cover Letter',
       cv: 'Resume',
       contact: 'Contact'
@@ -13,7 +14,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     hero: {
       greeting: "Hello, I'm Mustafa Altas",
       cta_primary: 'Get in Touch',
-      cta_secondary: 'Chat with AI',
+      cta_secondary: 'Read Articles',
     },
     about: {
       title: 'About Me',
@@ -23,6 +24,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     skills: {
       title: 'Technical Potential',
       subtitle: 'My current stack and ability to master new tools'
+    },
+    blog: {
+        title: 'Latest Writings',
+        subtitle: 'Thoughts on technology, coding patterns, and software architecture.',
+        read_more: 'Read Article',
+        maintenance_message: 'This page is currently under maintenance.'
     },
     cover_letter: {
       title: 'Motivation & Purpose',
@@ -46,15 +53,15 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       message_placeholder: 'How can I help you?',
       send: 'Send Message'
     },
-    ai: {
-      chat_trigger: 'Ask AI Assistant',
-      placeholder: 'Ask about my motivation, learning speed, or skills...',
-      disclaimer: 'Powered by Gemini 2.5 Flash. I can answer questions about Mustafa.',
-      intro: 'Hi! I am Mustafa\'s AI Assistant. Ask me about his passion for learning, his adaptability, or his tech stack!'
-    },
     seo: {
       title: 'Mustafa Altas | Motivated Tech Enthusiast',
       description: 'Portfolio of Mustafa Altas, a highly motivated developer passionate about continuous learning and innovation.'
+    },
+    ai: {
+      chat_trigger: 'Chat with AI',
+      intro: "Hi! I'm Mustafa's AI assistant. Ask me anything about his skills, experience, or projects!",
+      placeholder: 'Type your message...',
+      disclaimer: 'AI can make mistakes. Please verify important info.'
     }
   },
   tr: {
@@ -62,6 +69,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       home: 'Anasayfa',
       about: 'Hakkımda',
       skills: 'Yetenekler',
+      blog: 'Yazılarım',
       cover_letter: 'Ön Yazı',
       cv: 'Özgeçmiş',
       contact: 'İletişim'
@@ -69,7 +77,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     hero: {
       greeting: "Merhaba, Ben Mustafa Altas",
       cta_primary: 'İletişime Geç',
-      cta_secondary: 'Yapay Zeka ile Konuş',
+      cta_secondary: 'Yazıları Oku',
     },
     about: {
       title: 'Hakkımda',
@@ -79,6 +87,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     skills: {
       title: 'Teknik Potansiyel',
       subtitle: 'Mevcut yetkinliklerim ve yeni araçları öğrenme hızım'
+    },
+    blog: {
+        title: 'Blog & Notlar',
+        subtitle: 'Teknoloji trendleri, yazılım mimarisi ve deneyimlerim üzerine düşünceler.',
+        read_more: 'Makaleyi Oku',
+        maintenance_message: 'Şu an sayfa bakım aşamasındadır.'
     },
     cover_letter: {
       title: 'Motivasyon Mektubu',
@@ -102,15 +116,15 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       message_placeholder: 'Nasıl yardımcı olabilirim?',
       send: 'Mesaj Gönder'
     },
-    ai: {
-      chat_trigger: 'Asistana Sor',
-      placeholder: 'Motivasyonum, öğrenme hızım veya yeteneklerim hakkında sorun...',
-      disclaimer: 'Gemini 2.5 Flash tarafından desteklenmektedir.',
-      intro: 'Selam! Ben Mustafa\'nın AI Asistanıyım. Öğrenme tutkusu, uyum sağlama yeteneği veya teknolojileri hakkında bana her şeyi sorabilirsin!'
-    },
     seo: {
       title: 'Mustafa Altas | Motive Teknoloji Tutkunu',
       description: 'Sürekli öğrenmeye ve inovasyona tutkulu, motivasyonu yüksek geliştirici Mustafa Altas\'ın portföyü.'
+    },
+    ai: {
+      chat_trigger: 'AI ile Sohbet',
+      intro: "Merhaba! Ben Mustafa'nın AI asistanıyım. Yetenekleri, deneyimi veya projeleri hakkında bana her şeyi sorabilirsiniz!",
+      placeholder: 'Mesajınızı yazın...',
+      disclaimer: 'AI hatalar yapabilir. Lütfen önemli bilgileri doğrulayın.'
     }
   },
   de: {
@@ -118,6 +132,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       home: 'Startseite',
       about: 'Über mich',
       skills: 'Fähigkeiten',
+      blog: 'Blog',
       cover_letter: 'Anschreiben',
       cv: 'Lebenslauf',
       contact: 'Kontakt'
@@ -125,7 +140,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     hero: {
       greeting: "Hallo, ich bin Mustafa Altas",
       cta_primary: 'Kontaktieren',
-      cta_secondary: 'Chat mit AI',
+      cta_secondary: 'Artikel lesen',
     },
     about: {
       title: 'Über mich',
@@ -135,6 +150,12 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     skills: {
       title: 'Technisches Potenzial',
       subtitle: 'Mein aktueller Stack und meine Fähigkeit, Neues zu meistern'
+    },
+    blog: {
+        title: 'Blog & Gedanken',
+        subtitle: 'Gedanken zu Technologie, Coding-Patterns und Softwarearchitektur.',
+        read_more: 'Artikel lesen',
+        maintenance_message: 'Diese Seite befindet sich derzeit im Aufbau.'
     },
     cover_letter: {
       title: 'Anschreiben',
@@ -158,15 +179,15 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       message_placeholder: 'Wie kann ich helfen?',
       send: 'Nachricht Senden'
     },
-    ai: {
-      chat_trigger: 'Frag die KI',
-      placeholder: 'Fragen Sie nach meiner Motivation oder Lernfähigkeit...',
-      disclaimer: 'Angetrieben von Gemini 2.5 Flash.',
-      intro: 'Hallo! Ich bin Mustafas KI-Assistent. Fragen Sie mich nach seiner Lernleidenschaft, Anpassungsfähigkeit oder Tech-Stack!'
-    },
     seo: {
       title: 'Mustafa Altas | Motivierter Technologie-Enthusiast',
       description: 'Portfolio von Mustafa Altas, einem hochmotivierten Entwickler mit Leidenschaft für kontinuierliches Lernen.'
+    },
+    ai: {
+      chat_trigger: 'Chat mit KI',
+      intro: "Hallo! Ich bin Mustafas KI-Assistent. Fragen Sie mich alles über seine Fähigkeiten, Erfahrungen oder Projekte!",
+      placeholder: 'Nachricht eingeben...',
+      disclaimer: 'KI kann Fehler machen. Bitte überprüfen Sie wichtige Infos.'
     }
   }
 };
@@ -178,4 +199,34 @@ export const SKILLS_DATA: SkillData[] = [
   { subject: 'Problem Solving', A: 130, fullMark: 150 },
   { subject: 'Teamwork', A: 135, fullMark: 150 },
   { subject: 'Motivation', A: 150, fullMark: 150 },
+];
+
+export const BLOG_DATA: BlogPost[] = [
+    {
+        title: "Understanding React Server Components",
+        excerpt: "A deep dive into how Server Components change the data fetching paradigm and improve performance in modern Next.js applications.",
+        date: "March 15, 2024",
+        readTime: "5 min read",
+        category: "Frontend",
+        image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800",
+        link: "#"
+    },
+    {
+        title: "The Art of Clean Code",
+        excerpt: "Why readability matters more than cleverness. Exploring best practices for maintaining scalable codebases in large teams.",
+        date: "February 28, 2024",
+        readTime: "7 min read",
+        category: "Engineering",
+        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+        link: "#"
+    },
+    {
+        title: "Microservices vs Monolith",
+        excerpt: "Analyzing the trade-offs between architectural styles. When should you actually switch to microservices?",
+        date: "January 10, 2024",
+        readTime: "6 min read",
+        category: "Architecture",
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+        link: "#"
+    }
 ];
