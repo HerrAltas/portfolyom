@@ -13,13 +13,14 @@ export interface SkillData {
 }
 
 export interface BlogPost {
+    id: string;
     title: string;
     excerpt: string;
+    content: string[]; // Array of paragraphs for the full article
     date: string;
     readTime: string;
     category: string;
     image: string;
-    link: string;
 }
 
 export interface Translations {
@@ -51,6 +52,15 @@ export interface Translations {
     subtitle: string;
     read_more: string;
     maintenance_message: string;
+    view_all: string;
+    back_to_home: string;
+    back_to_blog: string;
+    all_posts_title: string;
+    all_posts_subtitle: string;
+    prev_page: string;
+    next_page: string;
+    page: string;
+    of: string;
   };
   cover_letter: {
     title: string;

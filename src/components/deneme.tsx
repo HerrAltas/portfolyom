@@ -1,9 +1,9 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
-import { ArrowRight, Github, Linkedin, Mail, FileText, Download, Quote, Loader2, CheckCircle, Send, ChevronDown, Code, Zap, Database, Terminal, Calendar, Clock, BookOpen, ArrowUpRight, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, FileText, Download, Quote, Loader2, CheckCircle, Send, ChevronDown, Code, Zap, Database, Terminal, Calendar, Clock, BookOpen, ArrowUpRight, AlertTriangle,X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { SKILLS_DATA, BLOG_DATA } from '../constants';
-import { BlogPost } from '../types';
 
 // Helper for smooth scrolling
 const scrollToSection = (sectionId: string) => {
@@ -13,9 +13,10 @@ const scrollToSection = (sectionId: string) => {
 };
 
 // --- HERO SECTION ---
-export const Hero: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article', id?: string) => void }> = ({ onViewChange }) => {
+export const Hero: React.FC = () => {
   const { t } = useLanguage();
   const [textIndex, setTextIndex] = useState(0);
+  
  const words = useMemo(() => ["Developer", "Innovator", "Quick Learner", "Problem Solver"], []);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -83,27 +84,20 @@ export const Hero: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article',
         <div className="flex flex-col sm:flex-row justify-center gap-6 animate-slide-up" style={{ animationDelay: '0.3s' }}>
           <a 
             href="#contact" 
-            onClick={() => scrollToSection('#contact')}
+            onClick={() => scrollToSection( '#contact')}
             className="group px-8 py-4 rounded-full bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-1"
           >
             {t.hero.cta_primary} 
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
-          <button
-            onClick={() => {
-                if (onViewChange) {
-                    onViewChange('blog');
-                    window.scrollTo(0, 0);
-                } else {
-                    const el = document.querySelector('#blog');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }
-            }}
+          <a
+            href="#blog"
+            onClick={() => scrollToSection( '#blog')}
              className="px-8 py-4 rounded-full bg-white dark:bg-white/5 text-gray-800 dark:text-white font-bold text-lg border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/10 transition-all backdrop-blur-md flex items-center justify-center gap-2 hover:shadow-lg hover:border-gray-300 dark:hover:border-white/20"
           >
             {t.hero.cta_secondary}
             <BookOpen className="w-5 h-5 opacity-70" />
-          </button>
+          </a>
         </div>
 
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity" onClick={() => scrollToSection( '#about')}>
@@ -252,20 +246,29 @@ export const Skills: React.FC = () => {
     );
 };
 
-// --- BLOG SECTION (Home Preview) ---
-export const Blog: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article', id?: string) => void }> = ({ onViewChange }) => {
+// --- BLOG SECTION ---
+export const Blog: React.FC = () => {
     const { t } = useLanguage();
+    const [showMaintenance, setShowMaintenance] = useState(false);
 
-    const handleArticleClick = (e: React.MouseEvent, id: string) => {
+    const handleArticleClick = (e: React.MouseEvent) => {
         e.preventDefault();
-        if (onViewChange) {
-            onViewChange('article', id);
-            window.scrollTo(0, 0);
-        }
+        setShowMaintenance(true);
+        setTimeout(() => setShowMaintenance(false), 3000);
     };
 
     return (
         <section id="blog" className="py-32 bg-gray-50 dark:bg-slate-950 relative overflow-hidden">
+             {/* Toast Notification */}
+             {showMaintenance && (
+                <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 animate-fade-in">
+                    <div className="bg-gray-900/90 dark:bg-white/90 backdrop-blur-md text-white dark:text-gray-900 px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border border-white/10 dark:border-black/10">
+                        <AlertTriangle className="w-5 h-5 text-yellow-500" />
+                        <span className="font-medium text-sm">{t.blog.maintenance_message}</span>
+                    </div>
+                </div>
+             )}
+
              {/* Decorative Background */}
             <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-100/20 via-transparent to-transparent dark:from-blue-900/10 pointer-events-none"></div>
 
@@ -278,18 +281,14 @@ export const Blog: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article',
                         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white font-display">{t.blog.title}</h2>
                         <p className="text-gray-600 dark:text-gray-400">{t.blog.subtitle}</p>
                     </div>
-                    <button 
-                        onClick={() => onViewChange && onViewChange('blog')}
-                        className="hidden md:flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold hover:gap-3 transition-all"
-                    >
-                        {t.blog.view_all} <ArrowRight className="w-5 h-5" />
-                    </button>
+                    <a href="#" className="hidden md:flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold hover:gap-3 transition-all">
+                        View all posts <ArrowRight className="w-5 h-5" />
+                    </a>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Only show the first 3 items in the preview */}
-                    {BLOG_DATA.slice(0, 3).map((post) => (
-                        <div key={post.id} className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-2xl hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300 hover:-translate-y-2">
+                    {BLOG_DATA.map((post, idx) => (
+                        <div key={idx} className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-2xl hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300 hover:-translate-y-2">
                             <div className="relative h-48 overflow-hidden">
                                 <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                                 <img src={post.image} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
@@ -317,7 +316,7 @@ export const Blog: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article',
                                     {post.excerpt}
                                 </p>
                                 
-                                <a href={`#article/${post.id}`} onClick={(e) => handleArticleClick(e, post.id)} className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mt-auto cursor-pointer">
+                                <a href={post.link} onClick={handleArticleClick} className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mt-auto cursor-pointer">
                                     {t.blog.read_more} <ArrowUpRight className="w-4 h-4" />
                                 </a>
                             </div>
@@ -325,196 +324,12 @@ export const Blog: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article',
                     ))}
                 </div>
                  <div className="mt-8 text-center md:hidden">
-                     <button 
-                        onClick={() => onViewChange && onViewChange('blog')}
-                        className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold"
-                     >
-                        {t.blog.view_all} <ArrowRight className="w-5 h-5" />
-                    </button>
+                     <a href="#" className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold">
+                        View all posts <ArrowRight className="w-5 h-5" />
+                    </a>
                  </div>
             </div>
         </section>
-    );
-};
-
-// --- ARTICLE DETAIL PAGE ---
-export const ArticleDetailPage: React.FC<{ post: BlogPost; onBack: () => void }> = ({ post, onBack }) => {
-    const { t } = useLanguage();
-    
-    return (
-        <div className="min-h-screen pt-32 pb-20 bg-white dark:bg-slate-950">
-            <div className="container mx-auto px-6 max-w-4xl">
-                 <button 
-                    onClick={() => {
-                        window.scrollTo({ top: 0, behavior: 'auto' });
-                        onBack();
-                    }}
-                    className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8 font-semibold"
-                >
-                    <ArrowLeft className="w-5 h-5" />
-                    {t.blog.back_to_blog}
-                </button>
-
-                <div className="space-y-8 animate-fade-in">
-                    <span className="inline-block px-4 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-sm font-bold rounded-full uppercase tracking-wider">
-                        {post.category}
-                    </span>
-
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 dark:text-white leading-tight">
-                        {post.title}
-                    </h1>
-
-                    <div className="flex items-center gap-6 text-gray-500 dark:text-gray-400 text-sm border-b border-gray-100 dark:border-slate-800 pb-8">
-                         <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            {post.date}
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
-                            {post.readTime}
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <img src="https://ui-avatars.com/api/?name=Mustafa+Altas&background=3b82f6&color=fff" alt="Mustafa Altas" className="w-6 h-6 rounded-full" />
-                            Mustafa Altas
-                        </div>
-                    </div>
-
-                    <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl mb-12">
-                         <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                    </div>
-
-                    <div className="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed space-y-6">
-                        {/* Simulating rich text content */}
-                        <p className="text-xl font-medium leading-relaxed text-gray-900 dark:text-gray-100">
-                            {post.excerpt}
-                        </p>
-                        {post.content.map((paragraph, index) => (
-                             <p key={index}>{paragraph}</p>
-                        ))}
-                    </div>
-
-                    <div className="border-t border-gray-100 dark:border-slate-800 pt-12 mt-12">
-                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Share this article</h3>
-                         <div className="flex gap-4">
-                            {['Twitter', 'LinkedIn', 'Facebook'].map(platform => (
-                                <button key={platform} className="px-6 py-2 rounded-full border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors text-sm font-semibold">
-                                    {platform}
-                                </button>
-                            ))}
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-// --- ALL POSTS PAGE ---
-export const AllPostsPage: React.FC<{ onBack: () => void; onArticleClick: (id: string) => void }> = ({ onBack, onArticleClick }) => {
-    const { t } = useLanguage();
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 6;
-
-    // Use full real data
-    const allPosts = BLOG_DATA;
-    
-    // Pagination logic
-    const totalPages = Math.ceil(allPosts.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentPosts = allPosts.slice(startIndex, startIndex + itemsPerPage);
-
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    return (
-        <div className="min-h-screen pt-32 pb-20 bg-gray-50 dark:bg-slate-950">
-            <div className="container mx-auto px-6">
-                <button 
-                    onClick={() => {
-                        window.scrollTo({ top: 0, behavior: 'auto' });
-                        onBack();
-                    }}
-                    className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-12 font-semibold"
-                >
-                    <ArrowLeft className="w-5 h-5" />
-                    {t.blog.back_to_home}
-                </button>
-
-                <div className="mb-16 text-center">
-                    <h1 className="text-4xl md:text-6xl font-display font-bold text-gray-900 dark:text-white mb-6">
-                        {t.blog.all_posts_title}
-                    </h1>
-                    <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                        {t.blog.all_posts_subtitle}
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    {currentPosts.map((post) => (
-                         <div key={post.id} className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-2xl hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300 hover:-translate-y-2">
-                            <div className="relative h-48 overflow-hidden">
-                                <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors z-10"></div>
-                                <img src={post.image} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
-                                <span className="absolute top-4 left-4 z-20 px-3 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-xs font-bold rounded-full text-blue-600 dark:text-blue-400">
-                                    {post.category}
-                                </span>
-                            </div>
-                            
-                            <div className="p-8 flex flex-col flex-grow">
-                                <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 mb-4 font-medium">
-                                    <div className="flex items-center gap-1">
-                                        <Calendar className="w-3.5 h-3.5" />
-                                        {post.date}
-                                    </div>
-                                    <div className="flex items-center gap-1">
-                                        <Clock className="w-3.5 h-3.5" />
-                                        {post.readTime}
-                                    </div>
-                                </div>
-                                
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                    {post.title}
-                                </h3>
-                                <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3 mb-6 flex-grow">
-                                    {post.excerpt}
-                                </p>
-                                
-                                <button onClick={() => { window.scrollTo({ top: 0, behavior: 'auto' }); onArticleClick(post.id); }} className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mt-auto cursor-pointer">
-                                    {t.blog.read_more} <ArrowUpRight className="w-4 h-4" />
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Pagination Controls */}
-                {totalPages > 1 && (
-                    <div className="flex justify-center items-center gap-4">
-                        <button 
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                            className="p-3 rounded-full bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
-                        >
-                            <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        
-                        <div className="text-sm font-bold text-gray-600 dark:text-gray-400">
-                            {t.blog.page} {currentPage} {t.blog.of} {totalPages}
-                        </div>
-
-                        <button 
-                             onClick={() => handlePageChange(currentPage + 1)}
-                             disabled={currentPage === totalPages}
-                             className="p-3 rounded-full bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </button>
-                    </div>
-                )}
-            </div>
-        </div>
     );
 };
 
@@ -598,131 +413,189 @@ export const CVSection: React.FC = () => {
 
 // --- CONTACT SECTION ---
 export const Contact: React.FC = () => {
-    const { t } = useLanguage();
-    const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-    const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+  const { t } = useLanguage();
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormState({ ...formState, [e.target.name]: e.target.value });
-    };
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!formState.name || !formState.email || !formState.message) return;
-        setStatus('sending');
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        setStatus('success');
-        setFormState({ name: '', email: '', message: '' });
-        setTimeout(() => setStatus('idle'), 3000);
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    return (
-        <section id="contact" className="py-32 bg-white dark:bg-dark relative">
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="max-w-6xl mx-auto bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-100 dark:border-slate-800 min-h-[650px]">
-                    <div className="p-12 md:w-2/5 bg-gradient-to-br from-blue-600 to-indigo-800 text-white flex flex-col justify-between relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-                        
-                        <div className="relative z-10">
-                            <h3 className="text-3xl font-bold mb-6 font-display">{t.contact.title}</h3>
-                            <p className="text-blue-100 text-lg mb-12 leading-relaxed font-light">Let's build something amazing together. Reach out for collaborations or just a chat.</p>
-                            
-                            <div className="space-y-8">
-                                <a href="mailto:mustafa.altas@example.com" className="flex items-center gap-5 hover:translate-x-2 transition-transform cursor-pointer group">
-                                    <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:bg-white/20 transition-colors">
-                                        <Mail className="w-6 h-6" />
-                                    </div>
-                                    <span className="font-medium text-lg">mustafa.altas@example.com</span>
-                                </a>
-                                <a href="#" className="flex items-center gap-5 hover:translate-x-2 transition-transform cursor-pointer group">
-                                    <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:bg-white/20 transition-colors">
-                                        <Linkedin className="w-6 h-6" />
-                                    </div>
-                                    <span className="font-medium text-lg">linkedin.com/in/mustafaaltas</span>
-                                </a>
-                            </div>
-                        </div>
+    const name = formState.name.trim();
+    const email = formState.email.trim();
+    const message = formState.message.trim();
+    if (!name || !email || !message) return;
 
-                        <div className="mt-12 relative z-10">
-                            <div className="flex gap-4">
-                                <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-blue-600 cursor-pointer transition-all duration-300">
-                                    <Github className="w-5 h-5" />
-                                </div>
-                                <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-blue-600 cursor-pointer transition-all duration-300">
-                                    <Linkedin className="w-5 h-5" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="p-12 md:w-3/5 bg-white dark:bg-slate-900">
-                        <form className="space-y-6 h-full flex flex-col justify-center" onSubmit={handleSubmit}>
-                            <div className="group">
-                                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 ml-1">Name</label>
-                                <input 
-                                    type="text" 
-                                    name="name"
-                                    value={formState.name}
-                                    onChange={handleInputChange}
-                                    placeholder={t.contact.name_placeholder} 
-                                    className="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 outline-none transition-all shadow-sm hover:shadow-md text-gray-900 dark:text-white placeholder-gray-400" 
-                                    required
-                                />
-                            </div>
-                            <div className="group">
-                                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 ml-1">Email</label>
-                                <input 
-                                    type="email" 
-                                    name="email"
-                                    value={formState.email}
-                                    onChange={handleInputChange}
-                                    placeholder={t.contact.email_placeholder} 
-                                    className="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 outline-none transition-all shadow-sm hover:shadow-md text-gray-900 dark:text-white placeholder-gray-400" 
-                                    required
-                                />
-                            </div>
-                            <div className="group">
-                                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 ml-1">Message</label>
-                                <textarea 
-                                    rows={4} 
-                                    name="message"
-                                    value={formState.message}
-                                    onChange={handleInputChange}
-                                    placeholder={t.contact.message_placeholder} 
-                                    className="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 outline-none transition-all shadow-sm hover:shadow-md text-gray-900 dark:text-white placeholder-gray-400 resize-none"
-                                    required
-                                ></textarea>
-                            </div>
-                            <button 
-                                type="submit" 
-                                disabled={status !== 'idle'}
-                                className={`w-full py-5 font-bold text-lg rounded-2xl transition-all transform hover:-translate-y-1 shadow-xl flex items-center justify-center gap-3 ${
-                                    status === 'success' 
-                                        ? 'bg-green-500 hover:bg-green-600 text-white shadow-green-500/30' 
-                                        : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-blue-500/30'
-                                }`}
-                            >
-                                {status === 'sending' ? (
-                                    <>
-                                        <Loader2 className="w-5 h-5 animate-spin" />
-                                        Sending...
-                                    </>
-                                ) : status === 'success' ? (
-                                    <>
-                                        <CheckCircle className="w-5 h-5" />
-                                        Sent!
-                                    </>
-                                ) : (
-                                    <>
-                                        {t.contact.send} <Send className="w-5 h-5 ml-1" />
-                                    </>
-                                )}
-                            </button>
-                        </form>
-                    </div>
-                </div>
+    setStatus('sending');
+
+    try {
+      const res = await fetch('https://formspree.io/f/mkgdapvq', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!res.ok) throw new Error('Formspree send failed');
+
+      setStatus('success');
+      setFormState({ name: '', email: '', message: '' });
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch  {
+      setStatus('error');
+      
+    }
+  };
+
+  return (
+    <section id="contact" className="py-32 bg-white dark:bg-dark relative">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-6xl mx-auto bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-100 dark:border-slate-800 min-h-[650px]">
+          <div className="p-12 md:w-2/5 bg-gradient-to-br from-blue-600 to-indigo-800 text-white flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+
+            <div className="relative z-10">
+              <h3 className="text-3xl font-bold mb-6 font-display">{t.contact.title}</h3>
+              <p className="text-blue-100 text-lg mb-12 leading-relaxed font-light">
+                Let's build something amazing together. Reach out for collaborations or just a chat.
+              </p>
+
+              <div className="space-y-8">
+                <a
+                  href="mailto:mustafa.altas@example.com"
+                  className="flex items-center gap-5 hover:translate-x-2 transition-transform cursor-pointer group"
+                >
+                  <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:bg-white/20 transition-colors">
+                    <Mail className="w-6 h-6" />
+                  </div>
+                  <span className="font-medium text-lg">mustafa.altas@example.com</span>
+                </a>
+
+                <a
+                  href="#"
+                  className="flex items-center gap-5 hover:translate-x-2 transition-transform cursor-pointer group"
+                >
+                  <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:bg-white/20 transition-colors">
+                    <Linkedin className="w-6 h-6" />
+                  </div>
+                  <span className="font-medium text-lg">linkedin.com/in/mustafaaltas</span>
+                </a>
+              </div>
             </div>
-        </section>
-    );
+
+            <div className="mt-12 relative z-10">
+              <div className="flex gap-4">
+                <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-blue-600 cursor-pointer transition-all duration-300">
+                  <Github className="w-5 h-5" />
+                </div>
+                <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-blue-600 cursor-pointer transition-all duration-300">
+                  <Linkedin className="w-5 h-5" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-12 md:w-3/5 bg-white dark:bg-slate-900">
+            <form className="space-y-6 h-full flex flex-col justify-center" onSubmit={handleSubmit}>
+              <div className="group">
+                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 ml-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formState.name}
+                  onChange={handleInputChange}
+                  placeholder={t.contact.name_placeholder}
+                  className="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 outline-none transition-all shadow-sm hover:shadow-md text-gray-900 dark:text-white placeholder-gray-400"
+                  required
+                  disabled={status === 'sending'}
+                />
+              </div>
+
+              <div className="group">
+                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 ml-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formState.email}
+                  onChange={handleInputChange}
+                  placeholder={t.contact.email_placeholder}
+                  className="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 outline-none transition-all shadow-sm hover:shadow-md text-gray-900 dark:text-white placeholder-gray-400"
+                  required
+                  disabled={status === 'sending'}
+                />
+              </div>
+
+              <div className="group">
+                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 ml-1">
+                  Message
+                </label>
+                <textarea
+                  rows={4}
+                  name="message"
+                  value={formState.message}
+                  onChange={handleInputChange}
+                  placeholder={t.contact.message_placeholder}
+                  className="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 outline-none transition-all shadow-sm hover:shadow-md text-gray-900 dark:text-white placeholder-gray-400 resize-none"
+                  required
+                  disabled={status === 'sending'}
+                ></textarea>
+              </div>
+
+              {/* Status mesajı */}
+              {status === 'error' && (
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  ❌ Senden fehlgeschlagen. Bitte erneut versuchen.
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={status !== 'idle'}
+                className={`w-full py-5 font-bold text-lg rounded-2xl transition-all transform hover:-translate-y-1 shadow-xl flex items-center justify-center gap-3 ${
+                  status === 'success'
+                    ? 'bg-green-500 hover:bg-green-600 text-white shadow-green-500/30'
+                    : status === 'error'
+                    ? 'bg-red-500 hover:bg-red-600 text-white shadow-red-500/30'
+                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-blue-500/30'
+                }`}
+              >
+                {status === 'sending' ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : status === 'success' ? (
+                  <>
+                    <CheckCircle className="w-5 h-5" />
+                    Sent!
+                  </>
+                ) : status === 'error' ? (
+                  <>
+                    <X className="w-5 h-5" />
+                    Error
+                  </>
+                ) : (
+                  <>
+                    {t.contact.send} <Send className="w-5 h-5 ml-1" />
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };

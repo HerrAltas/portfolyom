@@ -4,7 +4,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { Sun, Moon, Globe, Menu, X } from 'lucide-react';
 import { Language } from '../types';
 
-export const Navigation: React.FC = () => {
+export const Navigation: React.FC<{ onNavigate?: (target: string) => void }> = ({ onNavigate }) => {
   const { language, setLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
@@ -28,16 +28,20 @@ export const Navigation: React.FC = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-        const headerOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+    if (onNavigate) {
+        onNavigate(href);
+    } else {
+        const element = document.querySelector(href);
+        if (element) {
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
     }
     setMobileMenuOpen(false);
   };
