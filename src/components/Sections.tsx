@@ -257,8 +257,8 @@ export const Blog: React.FC<{
   onViewChange?: (view: 'home' | 'blog' | 'article', id?: string) => void;
   posts: BlogPost[];
   isLoading?: boolean;
-  onAddClick?: () => void;
-}> = ({ onViewChange, posts, isLoading, onAddClick }) => {
+
+}> = ({ onViewChange, posts, isLoading }) => {
     const { t } = useLanguage();
 
     const handleArticleClick = (e: React.MouseEvent, id: string) => {
