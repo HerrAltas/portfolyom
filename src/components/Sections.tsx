@@ -129,7 +129,7 @@ export const About: React.FC = () => {
                     <div className="w-full lg:w-1/2 relative group perspective-1000">
                         <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] transform rotate-6 scale-95 opacity-20 group-hover:rotate-12 group-hover:scale-100 transition-all duration-500 blur-2xl"></div>
                         <div className="relative rounded-[2rem] overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2 border border-white/20 dark:border-slate-700 bg-gray-100 dark:bg-slate-800">
-                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1000" alt="Working" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            <img src="../../public/mustafaaltas.jpeg" alt="Working" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300"></div>
                             <div className="absolute bottom-0 left-0 p-8">
                                 <p className="text-white font-display text-2xl font-bold">"Building the future, one line at a time."</p>
