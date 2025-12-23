@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 import { ArrowRight, Github, Linkedin, Mail, FileText, Download, Quote, Loader2, CheckCircle, Send, ChevronDown, Code, Zap, Database, Terminal, Calendar, Clock, BookOpen, ArrowUpRight, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { SKILLS_DATA, BLOG_DATA } from '../constants';
+import { SKILLS_DATA } from '../constants';
 import { BlogPost } from '../types';
 
 // Helper for smooth scrolling
@@ -11,7 +12,6 @@ const scrollToSection = (sectionId: string) => {
     behavior: 'smooth',
   });
 };
-
 // --- HERO SECTION ---
 export const Hero: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article', id?: string) => void }> = ({ onViewChange }) => {
   const { t } = useLanguage();
@@ -83,7 +83,7 @@ export const Hero: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article',
         <div className="flex flex-col sm:flex-row justify-center gap-6 animate-slide-up" style={{ animationDelay: '0.3s' }}>
           <a 
             href="#contact" 
-            onClick={() => scrollToSection('#contact')}
+            onClick={() => scrollToSection( '#contact')}
             className="group px-8 py-4 rounded-full bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-1"
           >
             {t.hero.cta_primary} 
@@ -129,7 +129,7 @@ export const About: React.FC = () => {
                     <div className="w-full lg:w-1/2 relative group perspective-1000">
                         <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] transform rotate-6 scale-95 opacity-20 group-hover:rotate-12 group-hover:scale-100 transition-all duration-500 blur-2xl"></div>
                         <div className="relative rounded-[2rem] overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2 border border-white/20 dark:border-slate-700 bg-gray-100 dark:bg-slate-800">
-                            <img src="../../public/mustafaaltas.jpeg" alt="Working" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1000" alt="Working" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300"></div>
                             <div className="absolute bottom-0 left-0 p-8">
                                 <p className="text-white font-display text-2xl font-bold">"Building the future, one line at a time."</p>
@@ -253,7 +253,12 @@ export const Skills: React.FC = () => {
 };
 
 // --- BLOG SECTION (Home Preview) ---
-export const Blog: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article', id?: string) => void }> = ({ onViewChange }) => {
+export const Blog: React.FC<{ 
+  onViewChange?: (view: 'home' | 'blog' | 'article', id?: string) => void;
+  posts: BlogPost[];
+  isLoading?: boolean;
+
+}> = ({ onViewChange, posts, isLoading }) => {
     const { t } = useLanguage();
 
     const handleArticleClick = (e: React.MouseEvent, id: string) => {
@@ -278,52 +283,61 @@ export const Blog: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article',
                         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white font-display">{t.blog.title}</h2>
                         <p className="text-gray-600 dark:text-gray-400">{t.blog.subtitle}</p>
                     </div>
-                    <button 
-                        onClick={() => onViewChange && onViewChange('blog')}
-                        className="hidden md:flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold hover:gap-3 transition-all"
-                    >
-                        {t.blog.view_all} <ArrowRight className="w-5 h-5" />
-                    </button>
+                    <div className="flex gap-4">
+                        <button 
+                            onClick={() => onViewChange && onViewChange('blog')}
+                            className="hidden md:flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold hover:gap-3 transition-all"
+                        >
+                            {t.blog.view_all} <ArrowRight className="w-5 h-5" />
+                        </button>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Only show the first 3 items in the preview */}
-                    {BLOG_DATA.slice(0, 3).map((post) => (
-                        <div key={post.id} className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-2xl hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300 hover:-translate-y-2">
-                            <div className="relative h-48 overflow-hidden">
-                                <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors z-10"></div>
-                                <img src={post.image} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
-                                <span className="absolute top-4 left-4 z-20 px-3 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-xs font-bold rounded-full text-blue-600 dark:text-blue-400">
-                                    {post.category}
-                                </span>
-                            </div>
-                            
-                            <div className="p-8 flex flex-col flex-grow">
-                                <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 mb-4 font-medium">
-                                    <div className="flex items-center gap-1">
-                                        <Calendar className="w-3.5 h-3.5" />
-                                        {post.date}
-                                    </div>
-                                    <div className="flex items-center gap-1">
-                                        <Clock className="w-3.5 h-3.5" />
-                                        {post.readTime}
-                                    </div>
+                {isLoading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {[1, 2, 3].map(i => (
+                            <div key={i} className="h-96 rounded-3xl bg-gray-200 dark:bg-slate-800 animate-pulse"></div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {posts.slice(0, 3).map((post) => (
+                            <div key={post.id} className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-2xl hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300 hover:-translate-y-2">
+                                <div className="relative h-48 overflow-hidden">
+                                    <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+                                    <span className="absolute top-4 left-4 z-20 px-3 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-xs font-bold rounded-full text-blue-600 dark:text-blue-400">
+                                        {post.category}
+                                    </span>
                                 </div>
                                 
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                    {post.title}
-                                </h3>
-                                <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3 mb-6 flex-grow">
-                                    {post.excerpt}
-                                </p>
-                                
-                                <a href={`#article/${post.id}`} onClick={(e) => handleArticleClick(e, post.id)} className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mt-auto cursor-pointer">
-                                    {t.blog.read_more} <ArrowUpRight className="w-4 h-4" />
-                                </a>
+                                <div className="p-8 flex flex-col flex-grow">
+                                    <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 mb-4 font-medium">
+                                        <div className="flex items-center gap-1">
+                                            <Calendar className="w-3.5 h-3.5" />
+                                            {post.date}
+                                        </div>
+                                        <div className="flex items-center gap-1">
+                                            <Clock className="w-3.5 h-3.5" />
+                                            {post.readTime}
+                                        </div>
+                                    </div>
+                                    
+                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        {post.title}
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3 mb-6 flex-grow">
+                                        {post.excerpt}
+                                    </p>
+                                    
+                                    <a href={`#article/${post.id}`} onClick={(e) => handleArticleClick(e, post.id)} className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mt-auto cursor-pointer">
+                                        {t.blog.read_more} <ArrowUpRight className="w-4 h-4" />
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
                  <div className="mt-8 text-center md:hidden">
                      <button 
                         onClick={() => onViewChange && onViewChange('blog')}
@@ -410,13 +424,17 @@ export const ArticleDetailPage: React.FC<{ post: BlogPost; onBack: () => void }>
 }
 
 // --- ALL POSTS PAGE ---
-export const AllPostsPage: React.FC<{ onBack: () => void; onArticleClick: (id: string) => void }> = ({ onBack, onArticleClick }) => {
+export const AllPostsPage: React.FC<{ 
+  onBack: () => void; 
+  onArticleClick: (id: string) => void;
+  posts: BlogPost[];
+}> = ({ onBack, onArticleClick, posts }) => {
     const { t } = useLanguage();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 6;
 
-    // Use full real data
-    const allPosts = BLOG_DATA;
+    // Use dynamic data
+    const allPosts = posts;
     
     // Pagination logic
     const totalPages = Math.ceil(allPosts.length / itemsPerPage);
