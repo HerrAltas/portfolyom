@@ -48,9 +48,9 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       subtitle: "Why I am the right fit for your team",
       content: [
         "To Whom It May Concern,",
-        "Software development is more than just writing code for me; it is a continuous journey of solving problems and creating value. Throughout my career, I have not only focused on technical excellence but also on adapting to the ever-changing landscape of technology. My greatest asset is not just what I know today, but how quickly I can master what comes tomorrow.",
-        "I thrive in dynamic environments where curiosity is rewarded and challenges are seen as opportunities. Whether it's mastering a new framework overnight or optimizing a complex system, I bring a level of energy and dedication that pushes projects forward.",
-        "I am eager to bring my adaptability, technical skills, and unwavering motivation to your team to build impactful solutions together.",
+        "For me, software development is not only about writing code, but about understanding problems, creating solutions, and delivering real value. Throughout my career, I have focused not only on technical excellence but also on adapting continuously to the ever-evolving nature of technology. My greatest strength lies not only in what I know today, but in how quickly and enthusiastically I can learn what comes next.",
+        "I perform best in dynamic environments where curiosity is encouraged and challenges are seen as opportunities. Whether it is learning a new technology in a short time, optimizing complex systems, or contributing to collaborative solutions within a team, I always bring dedication, structure, and a strong sense of responsibility to every project.",
+        "With my adaptability, analytical mindset, and strong motivation, I look forward to creating impactful and sustainable solutions together with your team.",
       ],
     },
     cv: {
@@ -126,9 +126,9 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       subtitle: "Neden ekibiniz için doğru kişiyim",
       content: [
         "Sayın Yetkili,",
-        "Yazılım geliştirme benim için sadece kod yazmaktan ibaret değil; sorunları çözmek ve değer yaratmak için sürekli bir yolculuktur. Kariyerim boyunca sadece teknik mükemmelliğe odaklanmakla kalmadım, aynı zamanda teknolojinin sürekli değişen doğasına uyum sağlamaya da büyük önem verdim. En büyük varlığım, bugün bildiklerimden ziyade, yarın gelecek olanları ne kadar hızlı öğrenebildiğimdir.",
-        "Merakın ödüllendirildiği ve zorlukların fırsat olarak görüldüğü dinamik ortamlarda en iyi performansımı sergilerim. İster yeni bir framework'ü bir gecede öğrenmek olsun, ister karmaşık bir sistemi optimize etmek; projelere her zaman ileriye taşıyan bir enerji ve adanmışlık katarım.",
-        "Uyumluluğumu, teknik becerilerimi ve sarsılmaz motivasyonumu ekibinize katarak birlikte etkileyici çözümler üretmek için sabırsızlanıyorum.",
+        "Yazılım geliştirme benim için yalnızca kod yazmak değil; problemleri anlamak, çözüm üretmek ve gerçek değer oluşturmak anlamına gelir. Kariyerim boyunca teknik yetkinliğimi geliştirmenin yanı sıra, teknolojinin sürekli değişen yapısına uyum sağlamayı da temel bir beceri olarak gördüm. En büyük gücüm, bugün bildiklerimden çok, yarın öğrenebileceklerime olan hızım ve isteğimdir.",
+        "Merakın teşvik edildiği, gelişimin desteklendiği ve zorlukların fırsata dönüştürüldüğü ortamlarda en yüksek verimle çalışırım. Yeni bir teknolojiyi kısa sürede kavrayabilmek, karmaşık süreçleri daha verimli hâle getirmek ve ekip içinde çözüm odaklı bir yaklaşım sergilemek benim için doğal bir çalışma biçimidir. Her projeye yalnızca teknik katkı değil; aynı zamanda disiplin, sorumluluk ve sürdürülebilir gelişim anlayışı da katarım.",
+        "Uyum yeteneğim, analitik düşünce yapım ve yüksek motivasyonumla, ekibinizle birlikte uzun vadeli ve etkili çözümler üretmeye değer katacağıma inanıyorum.",
       ],
     },
     cv: {
@@ -207,9 +207,9 @@ Mein Ziel ist es, meine bisherige Frontend-Erfahrung mit neuer Motivation zu ver
       subtitle: "Warum ich die richtige Wahl für Ihr Team bin",
       content: [
         "Sehr geehrte Damen und Herren,",
-        "Softwareentwicklung ist für mich mehr als nur das Schreiben von Code; es ist eine ständige Reise der Problemlösung und Wertschöpfung. Während meiner gesamten Laufbahn habe ich mich nicht nur auf technische Exzellenz konzentriert, sondern auch darauf, mich an die sich ständig verändernde Technologielandschaft anzupassen. Mein größtes Kapital ist nicht nur das, was ich heute weiß, sondern wie schnell ich das meistern kann, was morgen kommt.",
-        "Ich blühe in dynamischen Umgebungen auf, in denen Neugier belohnt wird und Herausforderungen als Chancen gesehen werden. Ob es darum geht, ein neues Framework über Nacht zu lernen oder ein komplexes System zu optimieren – ich bringe ein Maß an Energie und Engagement mit, das Projekte voranbringt.",
-        "Ich freue mich darauf, meine Anpassungsfähigkeit, meine technischen Fähigkeiten und meine unerschütterliche Motivation in Ihr Team einzubringen, um gemeinsam wirkungsvolle Lösungen zu entwickeln.",
+        "Softwareentwicklung bedeutet für mich nicht nur das Schreiben von Code, sondern vor allem das Lösen von Problemen und das Schaffen von echtem Mehrwert. Während meiner beruflichen Laufbahn habe ich mich nicht nur auf technische Exzellenz konzentriert, sondern auch großen Wert darauf gelegt, mich kontinuierlich an die sich schnell verändernde Technologielandschaft anzupassen. Meine größte Stärke ist nicht nur das, was ich heute weiß, sondern wie schnell und motiviert ich Neues lernen kann.",
+        "In dynamischen Umgebungen, in denen Neugier gefördert und Herausforderungen als Chancen betrachtet werden, arbeite ich besonders effektiv. Ob es darum geht, neue Technologien schnell zu erlernen, bestehende Systeme zu optimieren oder gemeinsam im Team nachhaltige Lösungen zu entwickeln – ich bringe stets Engagement, Struktur und Verantwortungsbewusstsein in jedes Projekt ein.",
+        "Mit meiner Anpassungsfähigkeit, meinem analytischen Denken und meiner hohen Motivation freue ich mich darauf, gemeinsam mit Ihrem Team langfristig erfolgreiche und wirkungsvolle Lösungen zu gestalten.",
       ],
     },
     cv: {

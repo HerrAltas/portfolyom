@@ -24,7 +24,6 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBack, onSuccess }) => {
   const [currentInput, setCurrentInput] = useState('');
   const [lastSearchTerm, setLastSearchTerm] = useState('technology');
   
-  const ADMIN_PASSWORD = "admin123";
 
   const [formData, setFormData] = useState({
     title: '',
@@ -48,7 +47,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBack, onSuccess }) => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) setIsAuthenticated(true);
+    
+    if (password === import.meta.env.VITE_ADMIN_PASSWORD) setIsAuthenticated(true);
     else alert("Geçersiz Şifre!");
   };
 
@@ -158,7 +158,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBack, onSuccess }) => {
               type="password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Şifre (admin123)"
+              placeholder="Şifre"
               className="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-slate-800 border-none outline-none focus:ring-2 ring-blue-500 text-center"
               autoFocus
             />
