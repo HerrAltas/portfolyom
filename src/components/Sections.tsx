@@ -5,6 +5,7 @@ import { ArrowRight, Linkedin, Mail, FileText, Download, Quote, Loader2, CheckCi
 import { useLanguage } from '../contexts/LanguageContext';
 import { SKILLS_DATA } from '../constants';
 import { BlogPost } from '../types';
+import Photo from "../assets/favicon.svg"
 
 // Helper for smooth scrolling
 const scrollToSection = (e: React.MouseEvent<HTMLElement>, href: string) => {
@@ -85,7 +86,7 @@ export const About: React.FC = () => {
                 <div className="flex flex-col lg:flex-row items-center gap-16">
                     <div className="w-full lg:w-1/2 relative group">
                         <div className="relative rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-500 group-hover:-translate-y-2 border border-white/20 dark:border-slate-700 bg-gray-100 dark:bg-slate-800">
-                            <img src="../../public/favicon.svg" alt="Working" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            <img src={Photo} alt="Working" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80"></div>
                             <div className="absolute bottom-0 left-0 p-8">
                                 <p className="text-white font-display text-2xl font-bold">{t.about.experience_title}</p>
