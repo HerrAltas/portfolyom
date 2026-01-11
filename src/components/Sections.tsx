@@ -55,7 +55,7 @@ export const Hero: React.FC<{ onViewChange?: (view: 'home' | 'blog' | 'article' 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full border border-blue-200 dark:border-blue-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md animate-fade-in shadow-lg">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span className="text-xs font-bold text-gray-600 dark:text-gray-300 tracking-wide uppercase">Yeni Fırsatlara Açık</span>
+            <span className="text-xs font-bold text-gray-600 dark:text-gray-300 tracking-wide uppercase">Offen für neue Möglichkeiten</span>
         </div>
         <h2 className="text-xl md:text-3xl font-light text-gray-600 dark:text-gray-300 mb-4 animate-slide-up">{t.hero.greeting}</h2>
         <h1 className="text-5xl md:text-8xl font-display font-bold text-gray-900 dark:text-white mb-8 leading-tight animate-slide-up">
@@ -85,15 +85,15 @@ export const About: React.FC = () => {
                 <div className="flex flex-col lg:flex-row items-center gap-16">
                     <div className="w-full lg:w-1/2 relative group">
                         <div className="relative rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-500 group-hover:-translate-y-2 border border-white/20 dark:border-slate-700 bg-gray-100 dark:bg-slate-800">
-                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1000" alt="Working" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            <img src="../../public/favicon.svg" alt="Working" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80"></div>
                             <div className="absolute bottom-0 left-0 p-8">
-                                <p className="text-white font-display text-2xl font-bold">"Geleceği her satırda kodluyorum."</p>
+                                <p className="text-white font-display text-2xl font-bold">{t.about.experience_title}</p>
                             </div>
                         </div>
                     </div>
                     <div className="w-full lg:w-1/2">
-                        <div className="inline-block px-3 py-1 mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-xs font-bold uppercase tracking-wider">Hakkımda</div>
+                        <div className="inline-block px-3 py-1 mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-xs font-bold uppercase tracking-wider">{t.about.title}</div>
                         <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight font-display">{t.about.title} <span className="text-blue-600">.</span></h2>
                         <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">{t.about.description}</p>
                     </div>
